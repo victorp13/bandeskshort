@@ -4,9 +4,16 @@
     {
         static void Main(string[] args)
         {
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            File.Delete(Path.Combine(desktopPath, "Discord.lnk"));       
-            File.Delete(Path.Combine(desktopPath, "Postman.lnk"));       
+            string[] apps = File.ReadAllLines("shortcuts.txt");
+
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string commonDesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory);
+            
+            foreach (string app in apps)
+            {
+                File.Delete(Path.Combine(desktopPath, app));
+                File.Delete(Path.Combine(commonDesktopPath, app));
+            }   
         }
     }
 }
